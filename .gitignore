@@ -3,6 +3,7 @@
 
 .bundle/
 config/database.yml
+spec/dummy/config/database.yml
 log/*.log
 pkg/
 spec/dummy/db/*.sqlite3
