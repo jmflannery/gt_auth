@@ -4,8 +4,8 @@ development:
   database: dummy_development
   pool: 5
   host: localhost
-  username: jack
-  password: secret
+  username:
+  password:
 
 test:
   adapter: postgresql
@@ -13,5 +13,5 @@ test:
   database: dummy_test
   pool: 5
   host: localhost
-  username: jack
-  password: secret
+  username:
+  password:
