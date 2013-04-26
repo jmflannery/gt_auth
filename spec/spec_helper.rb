@@ -8,7 +8,11 @@ require 'factory_girl_rails'
 Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+# This is causing the files to load in the wrong order
+#Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+# Temporary fix, load them in this order:
+require_relative 'support/session_helpers' 
+require_relative 'support/features'
 
 RSpec.configure do |config|
   config.mock_with :rspec
