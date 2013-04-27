@@ -10,7 +10,7 @@ module Features
     end
 
     def signin_with(name, password)
-      visit sigin_path
+      visit signin_path
       fill_in :name, with: name
       fill_in :password, with: password
       click_button 'Sign In'
