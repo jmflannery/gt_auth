@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421225549) do
+ActiveRecord::Schema.define(:version => 20130427164034) do
 
   create_table "gt_auth_administrators", :force => true do |t|
     t.string   "name"
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "remember_token"
   end
+
+  add_index "gt_auth_administrators", ["remember_token"], :name => "index_gt_auth_administrators_on_remember_token"
 
 end
