@@ -10,8 +10,7 @@ module GtAuth
 
     describe 'POST create' do
 
-      let(:wanda) { stub('administrator', as_json: attrs, id: 1) }
-
+      let(:wanda) { stub('administrator', as_json: attrs, remember_token: 'fg3h4jd8ddyd6') } 
       context 'given an authentic name and password' do
 
         before do
