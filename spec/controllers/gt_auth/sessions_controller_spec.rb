@@ -10,7 +10,7 @@ module GtAuth
 
     describe 'POST create' do
 
-      let(:wanda) { stub('administrator', as_json: attrs) }
+      let(:wanda) { stub('administrator', as_json: attrs, id: 1) }
 
       context 'given an authentic name and password' do
 
@@ -22,6 +22,11 @@ module GtAuth
         it 'signs the administrator in' do
           controller.should_receive(:sign_in).with(wanda)
           post :create, session: attrs, use_route: 'gt_auth'
+        end
+
+        it 'sets the current_admin' do
+          get :create, session: attrs, use_route: 'gt_auth'
+          controller.current_admin.should == wanda
         end
 
         it 'renders the authenticated administrator as json' do
