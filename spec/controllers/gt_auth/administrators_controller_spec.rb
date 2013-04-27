@@ -5,19 +5,37 @@ module GtAuth
 
     describe 'POST create' do
 
-      let(:attrs) {{ 'name' => 'jack', 'password' => 'secret', 'password_confirmation' => 'secret' }}
-      let(:administrator) { stub('administrator', as_json: attrs) }
+      context 'given valid attributes' do
 
-      it "creates and saves a profile" do
-        Administrator.should_receive(:create).with(attrs).and_return(administrator)
-        post :create, administrator: attrs, use_route: :gt_auth
+        let(:attrs) {{ 'name' => 'jack', 'password' => 'secret', 'password_confirmation' => 'secret' }}
+        let(:administrator) { stub('administrator', as_json: attrs) }
+
+        before do
+          Administrator.stub(:new).with(attrs).and_return(administrator)
+          administrator.stub(:save).and_return(true)
+        end
+
+        it "renders the Administrator as json" do
+          post :create, administrator: attrs, use_route: :gt_auth
+          response.body.should == attrs.to_json
+        end
       end
 
-      it "renders the Administrator as json" do
-        post :create, administrator: attrs, use_route: :gt_auth
-        response.body.should == attrs.to_json
+      context 'given mismatching passwords' do
+
+        let(:attrs) {{ 'name' => 'jack', 'password' => 'secret', 'password_confirmation' => 'wrong' }}
+        let(:invalid_admin) { stub('invalid admin') }
+
+        before do
+          Administrator.stub(:new).with(attrs).and_return(invalid_admin)
+          invalid_admin.stub(:save).and_return(false)
+        end
+
+        it "renders an error in json format" do
+          post :create, administrator: attrs, use_route: :gt_auth
+          response.body.should == %Q({"error":"Invalid attributes"})
+        end
       end
     end
-
   end
 end
