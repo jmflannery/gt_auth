@@ -19,10 +19,11 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.13"
   s.add_dependency "pg"
   s.add_dependency "jquery-rails"
-  s.add_dependency "ember-rails"
+  s.add_dependency "handlebars-source", "~> 1.0.0.rc3"
+  s.add_dependency "ember-rails", "~> 0.12.0"
+  s.add_dependency "ember-source", "~> 1.0.0rc3.2"
   s.add_dependency "bcrypt-ruby"
   
-
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'factory_girl_rails'
